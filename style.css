@@ -1,0 +1,24 @@
+/* Import font sambung aesthetic dari Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap');
+
+.paper {
+  background: #fffaf0 url('https://www.transparenttextures.com/patterns/white-linen.png'); 
+  /* warna krem dengan tekstur kertas */
+  padding: 30px;
+  width: 70%;
+  margin: 20px auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+  text-align: left;
+  font-family: 'Dancing Script', cursive; /* font sambung aesthetic */
+  font-size: 22px;
+  line-height: 1.6;
+  color: #4b2e2e;
+  animation: fadeInPaper 1s ease;
+}
+
+/* Animasi muncul */
+@keyframes fadeInPaper {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
+}

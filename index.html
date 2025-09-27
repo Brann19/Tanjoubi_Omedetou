@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hari Spesial Nona</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: lightpink url('https://i.ibb.co/9v7XptB/balloon.png') repeat;
+      background-size: cover;
+      overflow-x: hidden;
+    }
+    .page {
+      display: none;
+      min-height: 100vh;
+      width: 100%;
+      text-align: center;
+      padding: 40px 20px 80px;
+      box-sizing: border-box;
+      position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .page.active { display: block; opacity: 1; transform: translateY(0); }
+    h1, h2 { color: #b30059; text-shadow: 1px 1px 2px white; }
+    input, textarea {
+      padding: 10px; font-size: 16px; border-radius: 8px; border: 1px solid #ccc; margin: 10px 0;
+    }
+    textarea { width: 80%; height: 100px; }
+    button {
+      padding: 10px 20px; margin: 10px; border: none; border-radius: 8px;
+      background: #ff66a3; color: white; cursor: pointer; transition: 0.3s;
+    }
+    button:disabled { background: #ccc; cursor: not-allowed; }
+    button:hover:not(:disabled) { background: #e60073; transform: scale(1.05); }
+    .top-nav {
+      display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap;
+    }
+    .top-nav button { background: #ff99cc; font-weight: bold; }
+    .video-container {
+      position: relative; width: 70%; margin: 20px auto; aspect-ratio: 16/9;
+      background: #000; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .video-container video { width: 100%; height: 100%; object-fit: cover; }
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap');
+    .paper {
+      background: #fffaf0 url('https://www.transparenttextures.com/patterns/white-linen.png'); 
+      padding: 30px; width: 70%; margin: 20px auto; border-radius: 12px;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.2); text-align: left;
+      font-family: 'Dancing Script', cursive; font-size: 22px; line-height: 1.6;
+      color: #4b2e2e; min-height: 150px;
+    }
+    .footer-gif { margin-top: 30px; }
+    .footer-gif img { width: 80px; height: auto; border-radius: 12px; }
+    #muteBtn {
+      position: fixed; top: 20px; right: 20px; background: rgba(255, 102, 163, 0.9);
+      border: none; padding: 10px 15px; border-radius: 50px; color: white;
+      font-weight: bold; cursor: pointer; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: background 0.3s ease, transform 0.3s ease; display: none;
+    }
+    #muteBtn:hover { background: #e60073; transform: scale(1.1); }
+    .plane {
+      position: fixed; bottom: 50px; left: -100px; width: 60px;
+      transition: transform 3s linear; z-index: 2000; display: none;
+    }
+    .plane.fly { display: block; transform: translate(120vw, -100vh) rotate(45deg); }
+    #tetrisCanvas {
+      background: #111; display: block; margin: 0 auto; border: 2px solid #ff66a3;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Halaman 1 (Login) -->
+  <div class="page active" id="page1">
+    <h1>Selamat datang di hari spesial Nona 🎉</h1>
+    <p>Jangan lupa masukin nama kamu yaa</p>
+    <input type="text" id="username" placeholder="Masukkan nama Anda" required />
+    <br>
+    <button id="loginBtn" disabled>Lanjut yok ➡️</button>
+  </div>
+
+  <!-- Halaman 2 (Video + Spotify) -->
+  <div class="page" id="page2">
+    <div class="top-nav">
+      <button onclick="showPage(2)">Video</button>
+      <button onclick="showPage(3)">Doa</button>
+      <button onclick="showPage(4)">Wish</button>
+      <button onclick="showPage(5)">Game</button>
+    </div>
+    <h2>Video Spesial 🎥</h2>
+    <div class="video-container">
+      <video controls>
+        <source src="HBDD.mp4" type="video/mp4">
+        Browser Anda tidak mendukung video.
+      </video>
+    </div>
+    <h3>🎵 Playlist Spotify</h3>
+    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/0l9XpvvyANZV0LljASWksW?utm_source=generator"
+     width="100%" height="352" frameBorder="0" allowfullscreen=""
+     allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+     <div class="tenor-gif-embed"
+    style="text-align:center; margin:20px 0;" 
+    data-postid="14855460725867107717" 
+    data-share-method="host" 
+    data-aspect-ratio="1" 
+    data-width="200px"><a href="https://tenor.com/view/little-cute-cat-dancing-gif-14855460725867107717">Little Cute GIF</a>from <a href="https://tenor.com/search/little-gifs">Little GIFs</a>
+    </div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+    </div>
+
+  <!-- Halaman 3 (Doa + typing) -->
+  <div class="page" id="page3">
+    <div class="top-nav">
+      <button onclick="showPage(2)">Video</button>
+      <button onclick="showPage(3)">Doa</button>
+      <button onclick="showPage(4)">Wish</button>
+      <button onclick="showPage(5)">Game</button>
+    </div>
+    <h2 style="font-family: 'Brush Script MT', cursive; font-size: 28px;">Do'a ku untukmu</h2>
+    <div class="paper">
+      <p id="doaText"></p>
+    </div>
+     <div class="tenor-gif-embed"
+      style="text-align:center; margin:20px 0;"
+      data-postid="14345055558441530836" 
+      data-share-method="host" 
+      data-aspect-ratio="1.12245" 
+      data-width="200px"><a href="https://tenor.com/view/cat-gif-14345055558441530836">Cat Sticker</a>from <a href="https://tenor.com/search/cat-stickers">Cat Stickers</a>
+    </div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+  </div>  
+
+  <!-- Halaman 4 (Make a Wish) -->
+  <div class="page" id="page4">
+    <div class="top-nav">
+      <button onclick="showPage(2)">Video</button>
+      <button onclick="showPage(3)">Doa</button>
+      <button onclick="showPage(4)">Wish</button>
+      <button onclick="showPage(5)">Game</button>
+    </div>
+    <h2>Tulis Harapanmu dan Semoga Tercapai 🎂</h2>
+    <textarea id="wish" placeholder="Tulis make a wish di sini..."></textarea><br>
+    <button onclick="finishWish()">Finish 💌</button>
+    <div class="tenor-gif-embed" 
+    style="text-align:center; margin:20px 0;"
+    data-postid="7792501" 
+    data-share-method="host" 
+    data-aspect-ratio="0.968254" 
+    data-width="200px"><a href="https://tenor.com/view/valentine-cat-kitty-valentine-gift-gif-7792501">Valentine Cat Giftbag GIF</a>from <a href="https://tenor.com/search/valentine+cat-gifs">Valentine Cat GIFs</a>
+    </div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+  </div>
+
+  <!-- Halaman 5 (Game Tetris) -->
+<section id="page5" class="page">
+  <h2>🎮 Mainkan Tetris Sederhana</h2>
+  <div style="text-align:center;">
+    <canvas id="tetrisCanvas" width="200" height="400"></canvas>
+    <div>
+      Score: <span id="score">0</span> | Level: <span id="level">1</span>
+    </div>
+    <p>Gunakan ⬅️➡️⬆️⬇️ atau tombol di bawah untuk bermain</p>
+    <button onclick="startGame()">▶️ Mulai Game</button>
+    <button onclick="resetGame()">🔄 Ulangi Game</button>
+  </div>
+
+  <!-- Tombol panah untuk mobile -->
+  <div id="mobile-controls" style="margin-top:15px; text-align:center;">
+    <div>
+      <button onclick="control('up')" style="width:60px;height:60px;">⬆️</button>
+    </div>
+    <div>
+      <button onclick="control('left')" style="width:60px;height:60px;">⬅️</button>
+      <button onclick="control('down')" style="width:60px;height:60px;">⬇️</button>
+      <button onclick="control('right')" style="width:60px;height:60px;">➡️</button>
+    </div>
+  </div>
+</section>
+
+  <!-- Audio backsound -->
+  <audio id="backsound" loop>
+    <source src="lagu hbd.mp3" type="audio/mp3">
+    Browser Anda tidak mendukung audio.
+  </audio>
+
+  <button id="muteBtn">🔊</button>
+  <img src="https://i.ibb.co/mqf1j7S/paper-plane.png" class="plane" id="plane" alt="pesawat kertas">
+
+  <script>
+    // --- Navigasi halaman ---
+    function showPage(pageNum) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      const target = document.getElementById('page' + pageNum);
+      if (target) target.classList.add('active');
+
+      const muteBtn = document.getElementById('muteBtn');
+      if (pageNum === 3 || pageNum === 4) {
+        muteBtn.style.display = "block";
+      } else {
+        muteBtn.style.display = "none";
+      }
+      if (pageNum === 3) typeDoa();
+    }
+
+    // --- Validasi login ---
+    const usernameInput = document.getElementById('username');
+    const loginBtn = document.getElementById('loginBtn');
+    const backsound = document.getElementById('backsound');
+
+    usernameInput.addEventListener('input', () => {
+      loginBtn.disabled = usernameInput.value.trim() === "";
+    });
+
+    loginBtn.addEventListener('click', () => {
+      if (usernameInput.value.trim() !== "") {
+        showPage(2);
+        backsound.play().catch(() => {});
+        document.getElementById('muteBtn').style.display = "block";
+      }
+    });
+
+    // --- Finish wish ---
+    function finishWish() {
+      const wish = document.getElementById("wish").value.trim();
+      if (wish === "") { alert("Harap isi make a wish terlebih dahulu!"); return; }
+      alert("Terima kasih sudah mengisi harapanmu 💖\n\n" + wish);
+      const plane = document.getElementById('plane');
+      plane.classList.add('fly');
+      setTimeout(() => plane.classList.remove('fly'), 3000);
+    }
+
+    // --- mute/unmute ---
+    const muteBtn = document.getElementById('muteBtn');
+    let isMuted = false;
+    muteBtn.addEventListener('click', () => {
+      if (backsound.paused) backsound.play().catch(() => {});
+      isMuted = !isMuted;
+      backsound.muted = isMuted;
+      muteBtn.textContent = isMuted ? "🔇" : "🔊";
+    });
+
+    // --- typing doa ---
+    const doaMessage = `Semoga panjang umur, sehat selalu, dilimpahkan rezeki yang banyaaaaaak sekali, 
+    semoga dilancarkan dalam "kegiatan, keinginan, serta mimpi" nya, semoga diberikan keteguhan serta kekuatan hati 
+    untuk menghadapi segala jenis masalah hidup, semoga yang disemogakan segera tersemogakan, serta semoga selalu diberi kebahagiaan, aamiin 🌸`;
+    let doaIndex = 0, typingInterval;
+    function typeDoa() {
+      const doaTextElement = document.getElementById("doaText");
+      doaTextElement.textContent = "";
+      doaIndex = 0;
+      clearInterval(typingInterval);
+      typingInterval = setInterval(() => {
+        if (doaIndex < doaMessage.length) {
+          doaTextElement.textContent += doaMessage.charAt(doaIndex);
+          doaIndex++;
+        } else clearInterval(typingInterval);
+      }, 50);
+    }
+
+    // ==============================
+    // GAME TETRIS
+    // ==============================
+const cvs = document.getElementById("tetrisCanvas");
+const ctx = cvs.getContext("2d");
+
+const ROW = 20;
+const COL = 10;
+const SQ = 20;
+const VACANT = "#111"; // warna background
+
+function control(dir){
+  if(!currentPiece || gameOver) return;
+  if(dir=="left") currentPiece.moveLeft();
+  else if(dir=="right") currentPiece.moveRight();
+  else if(dir=="up") currentPiece.rotate();
+  else if(dir=="down") currentPiece.moveDown();
+}
+
+function drawSquare(x,y,color){
+  ctx.fillStyle = color;
+  ctx.fillRect(x*SQ,y*SQ,SQ,SQ);
+  ctx.strokeStyle = "black";
+  ctx.strokeRect(x*SQ,y*SQ,SQ,SQ);
+}
+
+// Buat board kosong
+let board = [];
+function initBoard(){
+  board = [];
+  for(let r=0;r<ROW;r++){
+    board[r] = [];
+    for(let c=0;c<COL;c++){
+      board[r][c] = VACANT;
+    }
+  }
+}
+function drawBoard(){
+  for(let r=0;r<ROW;r++){
+    for(let c=0;c<COL;c++){
+      drawSquare(c,r,board[r][c]);
+    }
+  }
+}
+initBoard();
+drawBoard();
+
+// Tetromino shapes
+const PIECES = [
+  [ [[1,1,1,1]], "cyan"], // I
+  [ [[1,1],[1,1]], "yellow"], // O
+  [ [[0,1,0],[1,1,1]], "purple"], // T
+  [ [[1,0,0],[1,1,1]], "blue"], // J
+  [ [[0,0,1],[1,1,1]], "orange"], // L
+  [ [[0,1,1],[1,1,0]], "green"], // S
+  [ [[1,1,0],[0,1,1]], "red"] // Z
+];
+
+// Kelas Piece
+function Piece(shape,color){
+  this.shape = shape;
+  this.color = color;
+  this.shapeIndex = 0;
+  this.activeShape = this.shape[this.shapeIndex];
+  this.x = 3;
+  this.y = -2;
+}
+Piece.prototype.fill = function(color){
+  for(let r=0;r<this.activeShape.length;r++){
+    for(let c=0;c<this.activeShape[r].length;c++){
+      if(this.activeShape[r][c]){
+        drawSquare(this.x+c,this.y+r,color);
+      }
+    }
+  }
+}
+Piece.prototype.draw = function(){ this.fill(this.color); }
+Piece.prototype.unDraw = function(){ this.fill(VACANT); }
+
+Piece.prototype.moveDown = function(){
+  if(!this.collision(0,1,this.activeShape)){
+    this.unDraw();
+    this.y++;
+    this.draw();
+  } else {
+    this.lock();
+    currentPiece = randomPiece();
+  }
+}
+Piece.prototype.moveLeft = function(){
+  if(!this.collision(-1,0,this.activeShape)){
+    this.unDraw();
+    this.x--;
+    this.draw();
+  }
+}
+Piece.prototype.moveRight = function(){
+  if(!this.collision(1,0,this.activeShape)){
+    this.unDraw();
+    this.x++;
+    this.draw();
+  }
+}
+Piece.prototype.rotate = function(){
+  let nextPattern = this.shape[(this.shapeIndex+1)%this.shape.length];
+  if(!this.collision(0,0,nextPattern)){
+    this.unDraw();
+    this.shapeIndex = (this.shapeIndex+1)%this.shape.length;
+    this.activeShape = this.shape[this.shapeIndex];
+    this.draw();
+  }
+}
+Piece.prototype.collision = function(x,y,piece){
+  for(let r=0;r<piece.length;r++){
+    for(let c=0;c<piece[r].length;c++){
+      if(!piece[r][c]) continue;
+      let newX = this.x+c+x;
+      let newY = this.y+r+y;
+      if(newX<0 || newX>=COL || newY>=ROW) return true;
+      if(newY<0) continue;
+      if(board[newY][newX]!=VACANT) return true;
+    }
+  }
+  return false;
+}
+Piece.prototype.lock = function(){
+  for(let r=0;r<this.activeShape.length;r++){
+    for(let c=0;c<this.activeShape[r].length;c++){
+      if(!this.activeShape[r][c]) continue;
+      if(this.y+r<0){
+        gameOver = true;
+        alert("Game Over!");
+        return;
+      }
+      board[this.y+r][this.x+c] = this.color;
+    }
+  }
+  // Cek full row
+  for(let r=0;r<ROW;r++){
+    let full = true;
+    for(let c=0;c<COL;c++){
+      if(board[r][c]==VACANT){
+        full = false;
+        break;
+      }
+    }
+    if(full){
+      for(let y=r;y>1;y--){
+        for(let c=0;c<COL;c++){
+          board[y][c] = board[y-1][c];
+        }
+      }
+      for(let c=0;c<COL;c++) board[0][c] = VACANT;
+      score += 10;
+      document.getElementById("score").innerText = score;
+      level = Math.floor(score/50)+1;
+      document.getElementById("level").innerText = level;
+    }
+  }
+  drawBoard();
+}
+
+// Generate random piece
+function randomPiece(){
+  let r = Math.floor(Math.random()*PIECES.length);
+  return new Piece([PIECES[r][0]],PIECES[r][1]);
+}
+
+let score=0, level=1;
+let currentPiece, dropStart, gameOver=false;
+
+function drop(){
+  let now = Date.now();
+  let delta = now-dropStart;
+  if(delta > (1000 - (level*50))){
+    currentPiece.moveDown();
+    dropStart = Date.now();
+  }
+  if(!gameOver) requestAnimationFrame(drop);
+}
+
+// Mulai game
+function startGame(){
+  initBoard();
+  drawBoard();
+  score=0; level=1; gameOver=false;
+  document.getElementById("score").innerText = score;
+  document.getElementById("level").innerText = level;
+  currentPiece = randomPiece();
+  dropStart = Date.now();
+  currentPiece.draw();
+  drop();
+}
+
+// Reset
+function resetGame(){
+  startGame();
+}
+
+// Kontrol keyboard
+document.addEventListener("keydown",function(e){
+  if(!currentPiece || gameOver) return;
+  if(e.key=="ArrowLeft") currentPiece.moveLeft();
+  else if(e.key=="ArrowRight") currentPiece.moveRight();
+  else if(e.key=="ArrowUp") currentPiece.rotate();
+  else if(e.key=="ArrowDown") currentPiece.moveDown();
+});
+</script>
+</body>
+</html>
